@@ -6,9 +6,11 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import type { SignOptions } from 'jsonwebtoken';
 import { PasswordService } from './services/password.service';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
+    UsersModule,
     ConfigModule,
 
     PassportModule.register({

@@ -1,4 +1,6 @@
-import { Prisma } from '../../../generated/prisma/client';
+// import { Prisma } from '../../../generated/prisma/client';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 export interface IUsersRepository {
   findById(id: string);
@@ -7,9 +9,9 @@ export interface IUsersRepository {
 
   findMany();
 
-  create(data: Prisma.UserCreateInput);
+  create(data: CreateUserDto);
 
-  update(id: string, data: Prisma.UserUpdateInput);
+  update(id: string, data: UpdateUserDto);
 
   delete(id: string);
 }
