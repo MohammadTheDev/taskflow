@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './services/password.service';
 import { UsersService } from '../users/users.service';
@@ -16,6 +16,7 @@ export class AuthService {
     const existingUser = await this.usersService.findByEmail(dto.email);
 
     if (existingUser) {
+      throw new ConflictException('Email already exists');
     }
 
     const hashedPassword = await this.passwordService.hash(dto.password);
@@ -31,6 +32,10 @@ export class AuthService {
     });
 
     return {
+      user: {
+        id: user.id,
+        email: user.email,
+      },
       accessToken,
     };
   }
